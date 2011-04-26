@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>js canvas utils testing</title>
+		<script>
+		//shim
+		var module = {
+			last:null,
+			set exports(value){
+				this.last = value;
+			}
+		}
+		,require = function(value){
+			module.lastRequire = value;
+		},__dirname = '/';
+		</script>
+		<script src="conversionlib.js"></script>
+		<script src="core.js"></script>
+	</head>
+	<body>
+		<div style='clear:both;width:608px;'>
+			<div id="col1" style="width:152px;float:left;">
+
+			</div>
+                        <div id="col2" style="width:152px;float:left;">
+
+			</div>
+			<div id="col3" style="width:152px;float:left;">
+
+			</div>
+                        <div id="col4" style="width:152px;float:left;">
+
+			</div>
+		</div>
+		<script>
+			var px = new PixelCore();
+
+			var runTest = function(column,image){
+				var img = new Image();
+
+				img.onload = function(){
+
+					document.getElementById(column).appendChild(img);
+
+					var i,d,c,col = document.getElementById(column);
+
+					for(i in px.transforms.grayscale){
+
+						px.transforms[i];
+						d = document.createElement('div');
+						d.appendChild(document.createTextNode(i));
+						c = document.createElement('canvas');
+						c.width = img.width;
+						c.height = img.height;
+						c.getContext('2d').drawImage(img,0,0);
+
+						var s = Date.now();
+						px.iterate(c,px.transforms.grayscale[i]);
+						console.log(i+': '+(Date.now()-s)+'ms');
+
+						c.style.display = 'block';
+						d.appendChild(c);
+						col.appendChild(d);
+					}
+				}
+				img.src = image;
+			};
+
+			var runServerTest = function(column,image){
+				var img;
+
+				var i,d,c,col = document.getElementById(column);
+
+				img = new Image();
+				img.src = image;
+				col.appendChild(img);
+
+				for(i in px.transforms.grayscale){
+					img = new Image();
+					img.src = '/generate?transform=grayscale&type='+i+'&file='+image;
+
+					d = document.createElement('div');
+					d.appendChild(document.createTextNode(i));
+					d.appendChild(img);
+					img.style.display = 'block';
+					col.appendChild(d);
+				}
+			}
+
+			runTest('col1','/sunflower.png');
+			runServerTest('col2','/sunflower.png');
+			runTest('col3','/endeavour.png');
+			runServerTest('col4','/endeavour.png');
+
+		</script>
+	</body>
+</html>
