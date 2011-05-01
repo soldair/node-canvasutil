@@ -16,9 +16,17 @@
 		</script>
 		<script src="conversionlib.js"></script>
 		<script src="core.js"></script>
+		<style>
+		.clearfix:after{content: " ";display: block;height: 0;clear: both;visibility: hidden;font-size: 0;}
+		.clearfix{display: block;min-height:0px;}
+		* html .clearfix{height: 1%}
+		.left{float:left;}
+		.right{float:right;}
+		</style>
+		
 	</head>
 	<body>
-		<div style='clear:both;width:608px;'>
+		<div class="clearfix" style='width:608px;'>
 			<div id="col1" style="width:152px;float:left;">
 
 			</div>
@@ -92,6 +100,83 @@
 			runTest('col3','/endeavour.png');
 			runServerTest('col4','/endeavour.png');
 
+		</script>
+		<div>
+			<img id='t-image' src="/sunflower.png"/>
+			<canvas id='threshold-test' style="display:block;"></canvas>
+		</div>
+		<script>
+			var tpx = new PixelCore(),c = document.getElementById('threshold-test');
+			c.getContext('2d').drawImage(document.getElementById('t-image'),0,0);
+			c.width = 150;
+			c.height = 113;
+			convert = conversionlib;
+			tpx.threshold = 50;
+			tpx.iterate(c,tpx.transforms.brightenThreshold);
+			//tpx.iterate(c,tpx.transforms.grayscale.luma);
+		</script>
+		<div>
+			<img id='s-image' src="/sunflower.png"/>
+			<canvas id='saturation-test' style="display:block;"></canvas>
+		</div>
+		<script>
+			c = document.getElementById('saturation-test');
+			c.width = 150;
+			c.height = 113;
+			c.getContext('2d').drawImage(document.getElementById('s-image'),0,0);
+			tpx.threshold = 50;
+			tpx.iterate(c,tpx.transforms.saturationThreshold);
+			//tpx.iterate(c,tpx.transforms.grayscale.luma);
+		</script>
+		<div>
+			<img id='endeavour-image' src="/endeavour.png"/>
+			<canvas id='endeavour-test-color' style="display:block;"></canvas>
+			<canvas id='endeavour-test' style="display:block;"></canvas>
+			<canvas id='endeavour-test-orig' style="display:block;"></canvas>
+		</div>
+		<div class="clearfix">
+			<div id="party1" class="left" style="background-color:rgb(16,26,33);width:100px;height:100px;">
+
+			</div>
+			<div id="party2" class="left" style="background-color:rgb(16,26,33);width:100px;height:100px;">
+
+			</div>
+			<div id="party3" class="left" style="background-color:rgb(16,26,33);width:100px;height:100px;">
+
+			</div>
+			<div id="party4" class="left" style="background-color:rgb(16,26,33);width:100px;height:100px;">
+
+			</div>
+		</div>
+		<script>
+			tpx.threshold = 80;//the higher the number the lighter the pixels can be to be targeted
+
+			c = document.getElementById('endeavour-test-color');
+			c.width = 150;
+			c.height = 113;
+			c.getContext('2d').drawImage(document.getElementById('endeavour-image'),0,0);
+			//tpx.iterate(c,tpx.transforms.traceDimThreshold);
+			//tpx.iterate(c,tpx.transforms.dimThreshold);
+			tpx.iterate(c,tpx.transforms.grayscale.luma);
+
+			c = document.getElementById('endeavour-test');
+			c.width = 150;
+			c.height = 113;
+			c.getContext('2d').drawImage(document.getElementById('endeavour-image'),0,0);
+			tpx.iterate(c,tpx.transforms.dimThreshold);
+			tpx.iterate(c,tpx.transforms.grayscale.luma);
+
+			/*
+			c = document.getElementById('endeavour-test-orig');
+			c.width = 150;
+			c.height = 113;
+			c.getContext('2d').drawImage(document.getElementById('endeavour-image'),0,0);
+			tpx.iterate(c,tpx.transforms.traceDimThreshold);
+			//tpx.iterate(c,tpx.transforms.dimThreshold);
+			//tpx.iterate(c,tpx.transforms.dimThreshold);
+			//tpx.iterate(c,tpx.transforms.dimThreshold);
+			//tpx.iterate(c,tpx.transforms.grayscale.luma);
+			*/
 		</script>
 	</body>
 </html>
