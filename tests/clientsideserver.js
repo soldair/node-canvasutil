@@ -57,6 +57,7 @@ app.get('/generate', function(req, res){
 			res.send('file must exist');
 			return;
 		}
+		
 		img.onload = function(){
 			try{
 				var canvas = new Canvas(img.width,img.height);
