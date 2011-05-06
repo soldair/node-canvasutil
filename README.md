@@ -11,25 +11,31 @@ PixelCore
 pixel core is the core object used to apply transforms on a canvas.
 
 this is a standard object so extend it as you need =)
+
 	var PixelCore = require('canvasutil').PixelCore
 	, pixelProcessor = new PixelCore();
 
 this is the only method defined in the prototype of PixelCore
 it accepts a node canvas as arg 1 and a transform callback as arg 2
+
 	pixelProcessor.iterate(Canvas,eachPixelCallback);
 
 this is a value that may be used in transform callbacks that have a scaling behavior
+
 	pixelProcessor.threshold = 50;
 
 the transforms object is a convience property to hold all available transform methods
+
 	pixelProcessor.transforms
 
 this holds all grayscale flavors of transforms
+
 	pixelProcessor.transforms.grayscale
 	//the best grayscale transform is luma so use that one unless you have a specific need
 	pixelProcessor.transforms.grayscale.luma
 
 and i have some other interesting transforms
+
 	//brightens everything below a threshold to threshold
 	//threshold range is 0-100
 	pixelProcessor.transforms.brightenThreshold
