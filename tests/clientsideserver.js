@@ -64,9 +64,9 @@ app.get('/generate', function(req, res){
 				var ctx = canvas.getContext('2d'),s;
 				ctx.drawImage(img,0,0);
 				
-				s = Date.now();
+				//s = Date.now();
 				px.iterate(canvas,px.transforms[q.transform][q.type]);
-				console.log((Date.now()-s)+'ms');
+				//console.log((Date.now()-s)+'ms');
 				
 				canvas.toBuffer(function(err, buf){
 					
