@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/soldair/node-canvasutil.png)](http://travis-ci.org/soldair/node-canvasutil)
 node-canvasutil
 ===============
 
