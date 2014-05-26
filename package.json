@@ -1,14 +1,13 @@
 {
   "name": "canvasutil",
   "description": "Pixel transformations and processing for canvas",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Ryan Day <soldair@gmail.com>",
   "keywords": [
     "canvas",
     "grayscale",
     "transform"
   ],
-  "main": "./app.js",
   "homepage": "http://github.com/soldair/node-canvasutil",
   "devDependencies": {
     "canvas": "^1.1.3"
